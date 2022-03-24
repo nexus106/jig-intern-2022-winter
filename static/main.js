@@ -12,10 +12,7 @@ function addTable(name,done){
   let newRow = table.insertRow()
 
   let newCell = newRow.insertCell()
-  let newText
-  const ch = Object.assign(document.createElement('input'),{type:"checkbox",name:"ch",value:"1"})
-  if(done == true)newText = document.createTextNode(ch)
-  else newText = document.createTextNode(ch)
+  let newText = document.createTextNode("チェックリスト")
   newCell.appendChild(newText)
 
   newCell = newRow.insertCell()
