@@ -1,5 +1,5 @@
 let intervalID
-set_place.onclick = async () => {
+set_place.onclick = async () => {//避難場所設定
   set_place.disabled = true
   const form = document.getElementById("place_name")
   const name = document.getElementById("place_name").value
