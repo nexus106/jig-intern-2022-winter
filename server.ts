@@ -36,6 +36,10 @@ serve( async(req) => {
                 return getList(req)
             case "/api/setCheck":
                 return setCheck(req)
+            case "/api/setPlace":
+                return setPlace(req)
+            case "/api/getPlace":
+                return getPlace(req)
         }
     }
 
@@ -51,7 +55,7 @@ serve( async(req) => {
         enableCors: true
     });
 });
-
+let place: String
 let list: check  [] = []
 
 interface check {
@@ -76,6 +80,17 @@ const setCheck = (req: Request) => {
     const num = Number(params.x)
     list[num-1].done = true
     return createJsonResponse({list})
+}
+
+const setPlace = (req: Request) => {
+    const params = parseSearchParams(new URL(req.url))
+    const name = params.x.toString()
+    place = name
+    return createJsonResponse({place})
+}
+
+const getPlace = (req: Request) => {
+    return createJsonResponse({place})
 }
 
 
