@@ -34,6 +34,8 @@ serve( async(req) => {
                 return setList(req)
             case "/api/getToDoList":
                 return getList(req)
+            case "/api/setCheck":
+                return setCheck(req)
         }
     }
 
@@ -71,7 +73,10 @@ const getList = (req: Request) => {
 }
 
 const setCheck = (req: Request) => {
-
+    const params = parseSearchParams(new URL(req.url))
+    const num = Number(params.x)
+    list[num-1].done = true
+    return createJsonResponse({list})
 }
 
 
