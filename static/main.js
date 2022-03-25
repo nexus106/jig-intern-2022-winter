@@ -9,7 +9,24 @@ set_list.onclick = async () => {
     set_list.disabled = false //連続クリックの防止、ボタン活性化
     return false
   }
-  const response = await fetch("/api/setList?x=" + name,{
+  const response = await fetch("/api/getToDoList",{
+    method: "GET"
+  })
+  const json = await response.json()
+  let list = json.list
+  let i = 0
+  if(list.length != 0){
+    while(i<list.length){
+      if(list[i].inside==name){
+        alert("すでに入っています")
+        form.value = ""
+        set_list.disabled = false
+        return false
+      }
+      i++
+    }
+  }
+  const res = await fetch("/api/setList?x=" + name,{
     method: "GET"
   })
   form.value = ""; //追加ごとに入力フォームを初期化
@@ -77,7 +94,6 @@ async function addlistData(){//リストにデータを表示
 
   for(let i = 0;i < list.length;i++){
     addTable(list[i].inside,list[i].done)
-    console.log(list[i].inside)
   }
   myCheck()
 
