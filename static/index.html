@@ -6,6 +6,7 @@
   </head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
   <body class="Body">
     <p class="text-center bg-danger text-light" style="font-size:65px">防災チェッカー(仮)</p>
@@ -51,5 +52,21 @@
         </div>
     </div>
     <script type="module" src="main.js"></script>
+
+    <button type="button" onclick="sendPushNotification()">通知テスト</button>
+    <script type="text/javascript">
+        function sendPushNotification() {
+            Push.create('テスト', {
+                body: 'テスト',
+                icon: 'index.jpg',
+                timeout: 5000,
+                onClick: function () {
+                    this.close();
+                    location.href = 'https://hogehoge.jp';
+                }
+            });
+        }
+    </script>
+
   </body>
 </html>

@@ -14,18 +14,46 @@ set_list.onclick = async () => {
   })
   form.value = ""; //追加ごとに入力フォームを初期化
   set_list.disabled = false //連続クリックの防止、ボタン活性化
+  addlistData()
+
 }
 
-function addTable(name,done){
+async function myCheck(){
+  (async function() {
+    $("thead tr").click(async function(){
+      let i = $("thead tr").index(this)
+      if(i>0){
+        const response = await fetch("/api/getToDoList",{
+          method: "GET"
+        })
+        const json = await response.json()
+        const list = json.list
+        const name = list[i-1].inside
+        let result = window.confirm( name + "が完了でよろしいですか")
+        if(result){
+          const response = await fetch("/api/setCheck?x=" + i,{
+          method: "GET"
+          })
+        }
+      }
+    })
+  })()
+}
+
+
+async function addTable(name,done){
   let table = document.getElementById("stay_home_list")
   let newRow = table.insertRow()
   let newCell = newRow.insertCell()
-  let newText = document.createTextNode("チェックリスト")
-  newCell.appendChild(newText)
+  let ch
+  if(done == true )ch = Object.assign(document.createElement('input'),{type:"checkbox",class:"ch",name:"ch",id:"ch",checked:"true",disabled:"disabled"})
+  else ch = Object.assign(document.createElement('input'),{type:"checkbox",class:"ch",name:"ch",id:"ch",disabled:"disabled"})
+  newCell.appendChild(ch)
 
   newCell = newRow.insertCell()
-  newText = document.createTextNode(name)
+  let newText = document.createTextNode(name)
   newCell.appendChild(newText)
+
 }
 
 async function addlistData(){//リストにデータを表示
@@ -34,7 +62,6 @@ async function addlistData(){//リストにデータを表示
   })
   const json = await response.json()
   const list = json.list
-  console.log(list)
   let table = document.getElementById("stay_home_list")
   table.deleteTHead()
   let thead = table.createTHead();
@@ -47,11 +74,13 @@ async function addlistData(){//リストにデータを表示
   newCell = newRow.insertCell()
   newText = document.createTextNode("やることの内容")
   newCell.appendChild(newText)
+
   for(let i = 0;i < list.length;i++){
     addTable(list[i].inside,list[i].done)
     console.log(list[i].inside)
   }
-  
+  myCheck()
+
 }
 
 window.onload = await function() {
