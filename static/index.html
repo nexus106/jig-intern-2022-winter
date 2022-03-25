@@ -19,20 +19,6 @@
                 <button id="set_list" class="btn btn-secondary">リストに追加</button>
                 <p class="col-md-5"></p>
                 <p class="col-md-5"></p>
-                <button type="button" onclick="sendPushNotification()"class="btn btn-secondary">通知テスト</button>
-                <script type="text/javascript">
-                    function sendPushNotification() {
-                        Push.create('テスト', {
-                            body: 'テスト',
-                            icon: 'index.jpg',
-                            timeout: 5000,
-                            onClick: function () {
-                                this.close();
-                                location.href = 'https://hogehoge.jp';
-                            }
-                        });
-                    }
-                </script>
             </div>
             <div class="col-md-4">
                 <div class="border-bottom border-top border-danger" style="font-family:'Caveat'; font-size:37px">List</div>
@@ -49,23 +35,25 @@
             <div class="col-md-4">
                 <img class="rounded-circle img-fluid img-thumbnail" src="img/jig_intern.png">
             </div>
+            <div class="col-md-4">
+                <button type="button" onclick="sendPushNotification()"class="btn btn-secondary">通知テスト</button>
+                <script type="text/javascript">
+                    function sendPushNotification() {
+                        Push.create('テスト', {
+                            body: 'テスト',
+                            icon: 'index.jpg',
+                            timeout: 5000,
+                            onClick: function () {
+                                this.close();
+                                location.href = 'https://hogehoge.jp';
+                            }
+                        });
+                    }
+                </script>
+            </div>
         </div>
     </div>
     <script type="module" src="main.js"></script>
-
-    <script type="text/javascript">
-        function sendPushNotification() {
-            Push.create('テスト', {
-                body: 'テスト',
-                icon: 'index.jpg',
-                timeout: 5000,
-                onClick: function () {
-                    this.close();
-                    location.href = 'https://hogehoge.jp';
-                }
-            });
-        }
-    </script>
 
   </body>
 </html>
