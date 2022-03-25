@@ -1,4 +1,23 @@
 let intervalID
+set_place.onclick = async () => {
+  set_place.disabled = true
+  const form = document.getElementById("place_name")
+  const name = document.getElementById("place_name").value
+  if(name.length == 0){
+    alert("何も入力されていません")
+    set_place.disabled = false
+    return false
+  }
+  const response = await fetch("/api/setPlace?x=" + name,{
+    method: "GET"
+  })
+  const json = await response.json()
+  let place = json.place
+  const content = document.getElementById("place")
+  content.innerHTML = place
+  $(place_name).remove()
+  $(set_place).remove()
+}
 
 set_list.onclick = async () => {
   set_list.disabled = true //連続クリックの防止、ボタン非活性化
@@ -32,7 +51,6 @@ set_list.onclick = async () => {
   form.value = ""; //追加ごとに入力フォームを初期化
   set_list.disabled = false //連続クリックの防止、ボタン活性化
   addlistData()
-
 }
 
 async function myCheck(){
@@ -70,7 +88,6 @@ async function addTable(name,done){
   newCell = newRow.insertCell()
   let newText = document.createTextNode(name)
   newCell.appendChild(newText)
-
 }
 
 async function addlistData(){//リストにデータを表示
@@ -99,6 +116,17 @@ async function addlistData(){//リストにデータを表示
 
 }
 
-window.onload = await function() {
+window.onload = async function() {
+  const response = await fetch("/api/getPlace",{
+    method: "GET"
+  })
+  const json = await response.json()
+  const place = json.place
+  if(place != null){
+    const content = document.getElementById("place")
+    content.innerHTML = place
+    $(place_name).remove()
+    $(set_place).remove()
+  }
   intervalID = setInterval(addlistData,1000)
 }
