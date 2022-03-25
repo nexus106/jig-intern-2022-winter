@@ -113,7 +113,6 @@ async function addlistData(){//リストにデータを表示
     addTable(list[i].inside,list[i].done)
   }
   myCheck()
-
 }
 
 window.onload = async function() {
