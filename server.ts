@@ -60,7 +60,6 @@ interface check {
 }
 
 
-
 const setList = (req: Request) => { //送られたデータをそのまま返す
     const params = parseSearchParams(new URL(req.url))
     const name = params.x.toString()
@@ -78,9 +77,6 @@ const setCheck = (req: Request) => {
     list[num-1].done = true
     return createJsonResponse({list})
 }
-
-
-
 
 
 // 従来の function を使った関数宣言
