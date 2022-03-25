@@ -1,3 +1,8 @@
+
+.Body{
+  background-color: beige;
+}
+
 .m-form-text {
   height: 2.4em;
   padding: 0 16px;
@@ -32,34 +37,3 @@
   padding: 10px;
   border-width: 1px 0px; 
  }
-
-
-button.btn {
-  display: inline-block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  text-align: center;
-  vertical-align: middle;
-  text-decoration: none;
-  letter-spacing: 0.1em;
-  color: #212529;
-  border-radius: 0.5rem;
-}
-
-a.btn--color {
-  color: #fff;
-  background-color: #d3d3d3;
-}
-a.btn--color:hover {
-  color: #fff;
-  background: #d3d3d3;
-}
-a.btn--shadow {
-  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-  box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-}
